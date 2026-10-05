@@ -444,6 +444,10 @@ function buildICS(event) {
 
 	if (event.description) lines.push(`DESCRIPTION:${escapeICSText(event.description)}`);
 	if (event.location) lines.push(`LOCATION:${escapeICSText(event.location)}`);
+	const categories = (Array.isArray(event.categories) ? event.categories : [event.categories])
+		.map((c) => String(c == null ? '' : c).trim())
+		.filter(Boolean);
+	if (categories.length) lines.push(`CATEGORIES:${categories.map(escapeICSText).join(',')}`);
 	if (Number.isFinite(event.sequence)) lines.push(`SEQUENCE:${event.sequence}`);
 
 	// For a timed event the reminder is relative to the start. For an all-day
@@ -1513,6 +1517,7 @@ class CalDAVBridgePlugin extends Plugin {
 					title,
 					description: event.description,
 					location: event.location,
+					categories: event.categories != null ? event.categories : event.category,
 					alarmStamp,
 					sequence,
 				})
@@ -1541,6 +1546,7 @@ class CalDAVBridgePlugin extends Plugin {
 			title,
 			description: event.description,
 			location: event.location,
+			categories: event.categories != null ? event.categories : event.category,
 			alarmMinutes: alarm,
 			sequence,
 		});

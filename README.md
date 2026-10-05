@@ -78,6 +78,7 @@ const r = await cb.api.createEvent({
   durationMinutes: 30,
   description: "Quarterly review",
   location: "Studio",
+  categories: "Work",        // string or array (or `category`); written as CATEGORIES
   alarmMinutes: 15           // omit to use the default from the settings
 });
 // r = { ok, status, message, uid, url }
