@@ -1517,7 +1517,7 @@ class CalDAVBridgePlugin extends Plugin {
 					title,
 					description: event.description,
 					location: event.location,
-					categories: event.categories,
+					categories: event.categories != null ? event.categories : event.category,
 					alarmStamp,
 					sequence,
 				})
@@ -1546,7 +1546,7 @@ class CalDAVBridgePlugin extends Plugin {
 			title,
 			description: event.description,
 			location: event.location,
-			categories: event.categories,
+			categories: event.categories != null ? event.categories : event.category,
 			alarmMinutes: alarm,
 			sequence,
 		});
